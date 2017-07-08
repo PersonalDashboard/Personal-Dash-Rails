@@ -1,6 +1,7 @@
 class DashboardsController < ApplicationController
   before_action :authenticate_user!
   def index
+    redirect_to dashboard_path(current_user.dashboards.first)
   end
 
   def show

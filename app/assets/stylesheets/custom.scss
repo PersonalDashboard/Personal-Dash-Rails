@@ -9,10 +9,24 @@ body{
   margin-bottom: 10px;
 }
 
-.jumbotron h2{
+.title{
+  margin-left: 3em;
+  display: inline-block;
+}
+
+.title, .dropdown-toggle{
   font-family: 'Exo 2', sans-serif;
   font-weight: bold;
-  margin: 0;
+  font-size: 2em;
+}
+
+.dropdown{
+  margin-right: 2em;
+}
+
+.dropdown-toggle, .dropdown-toggle:hover{
+  text-decoration: none;
+  color: #ffffff;
 }
 
 .container{
