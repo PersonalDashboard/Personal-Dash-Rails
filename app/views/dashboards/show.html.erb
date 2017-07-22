@@ -10,9 +10,8 @@
     </div>
   </div>
 </div>
-<div class="container">
-  
 
+<div class="container">
   <div class="row">
     <div class="col-md-3">
       <div class="panel panel-default icon-panel">
@@ -24,7 +23,7 @@
           <div class="col-md-3"><div class="glyphicon glyphicon-time"></div></div>
           <div class="col-md-9" id="time"></div>
           <div class="col-md-3"><div class="weather-icon <%= @current_weather_icon %>"></div></div>
-          <div class="col-md-9"><div id="temp" data-city=<%= @dashboard.user.home_city %>><%= @temp %>&deg;</div></div>
+          <div class="col-md-9"><div id="temp"><%= @temp %>&deg;</div></div>
         </div>
       </div>
     </div>
@@ -42,7 +41,7 @@
         </div>
       </div>
     </div>
-    
+
     <div class="col-md-3">
       <div class="panel panel-default icon-panel">
         <div class="panel-heading">
@@ -86,7 +85,7 @@
             height="450"
             frameborder="0" style="border:0"
             src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyDegZ6M6uR-zuwpyWGNZOiQ4k3qOs5_kJw
-            &origin=<%= "#{@dashboard.user.home_address}+#{@dashboard.user.home_city}+#{@dashboard.user.home_state}" %>&destination=<%= "#{@dashboard.user.work_address}+#{@dashboard.user.work_city}+#{@dashboard.user.work_state}" %>" allowfullscreen>
+            &origin=<%= @dashboard.home_address_for_maps %>&destination=<%= @dashboard.work_address_for_maps %>" allowfullscreen>
           </iframe>
         </div>
       </div>
