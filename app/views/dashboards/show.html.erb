@@ -23,8 +23,8 @@
         <div id="time-container" class="panel-body">
           <div class="col-md-3"><div class="glyphicon glyphicon-time"></div></div>
           <div class="col-md-9" id="time"></div>
-          <div class="col-md-3"><div class="weather-icon"></div></div>
-          <div class="col-md-9"><div id="temp" data-city=<%= @dashboard.user.home_city %>></div></div>
+          <div class="col-md-3"><div class="weather-icon <%= @current_weather_icon %>"></div></div>
+          <div class="col-md-9"><div id="temp" data-city=<%= @dashboard.user.home_city %>><%= @temp %>&deg;</div></div>
         </div>
       </div>
     </div>
@@ -36,6 +36,9 @@
           <h2 class="panel-title pull-right">News</h2>
         </div>
         <div id="newsfeed" class="panel-body">
+          <% @news_articles.each do |article| %>
+            <div class='col-md-12'><a href=<%= article["url"] %>><%= article["title"] %></a></div>
+          <% end %>
         </div>
       </div>
     </div>
@@ -47,8 +50,12 @@
           <h2 class="panel-title pull-right">How To</h2>
         </div>
         <div class="panel-body">
-          <div class="col-md-3" id="how-to-thumb"></div>
-          <div class="col-md-9" id="how-to"></div>
+          <div class="col-md-3" id="how-to-thumb">
+            <div class='col-md-12'><img src="<%= @how_to_data["thumbnail"] %>" height="75" width="75"/></div>
+          </div>
+          <div class="col-md-9" id="how-to">
+            <div class='col-md-12'><a href="<%= @how_to_data["url"] %>"><%= @how_to_data["title"] %></a></div>
+          </div>
         </div>
       </div>
     </div>
@@ -60,6 +67,7 @@
           <h2 class="panel-title pull-right">Quote of the Day</h2>
         </div>
         <div id="quote" class="panel-body">
+          <div class='col-md-12'><%= @quote_data %></div>
         </div>
       </div>
     </div>
