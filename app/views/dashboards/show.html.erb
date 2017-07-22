@@ -86,7 +86,7 @@
             height="450"
             frameborder="0" style="border:0"
             src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyDegZ6M6uR-zuwpyWGNZOiQ4k3qOs5_kJw
-            &origin=<%= "#{@dashboard.user.home_address}+#{@dashboard.user.home_city}" %>&destination=<%= "#{@dashboard.user.work_address}+#{@dashboard.user.work_city}" %>" allowfullscreen>
+            &origin=<%= "#{@dashboard.user.home_address}+#{@dashboard.user.home_city}+#{@dashboard.user.home_state}" %>&destination=<%= "#{@dashboard.user.work_address}+#{@dashboard.user.work_city}+#{@dashboard.user.work_state}" %>" allowfullscreen>
           </iframe>
         </div>
       </div>
