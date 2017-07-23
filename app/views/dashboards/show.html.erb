@@ -20,10 +20,14 @@
           <h2 class="panel-title pull-right"><%= @dashboard.user.home_city.capitalize %></h2>
         </div>
         <div id="time-container" class="panel-body">
-          <div class="col-md-3"><div class="glyphicon glyphicon-time"></div></div>
-          <div class="col-md-9" id="time"></div>
-          <div class="col-md-3"><div class="weather-icon <%= @current_weather_icon %>"></div></div>
-          <div class="col-md-9"><div id="temp"><%= @temp %>&deg;</div></div>
+          <div class="row">
+            <div class="col-md-3 col-xs-1"><div class="glyphicon glyphicon-time"></div></div>
+            <div class="col-xs-9" id="time"></div>
+          </div>
+          <div class="row">
+            <div class="col-md-3 col-xs-1"><div class="weather-icon <%= @current_weather_icon %>"></div></div>
+            <div class="col-xs-9"><div id="temp"><%= @temp %>&deg;</div></div>
+          </div>
         </div>
       </div>
     </div>
@@ -49,10 +53,10 @@
           <h2 class="panel-title pull-right">How To</h2>
         </div>
         <div class="panel-body">
-          <div class="col-md-3" id="how-to-thumb">
+          <div class="col-md-3 col-xs-1" id="how-to-thumb">
             <div class='col-md-12'><img src="<%= @how_to_data["thumbnail"] %>" height="75" width="75"/></div>
           </div>
-          <div class="col-md-9" id="how-to">
+          <div class="col-xs-9" id="how-to">
             <div class='col-md-12'><a href="<%= @how_to_data["url"] %>"><%= @how_to_data["title"] %></a></div>
           </div>
         </div>
