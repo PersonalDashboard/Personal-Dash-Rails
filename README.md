@@ -1,5 +1,5 @@
 # Personal Dash: your Daily Overview
-![screen shot 2017-07-12 at 10 06 06 am](https://user-images.githubusercontent.com/11463275/28121644-ca5efa98-66e9-11e7-8fb2-e141e797ec59.png)
+![screen shot 2017-07-23 at 10 41 54 pm](https://user-images.githubusercontent.com/11463275/28506279-33fedeb6-6ff8-11e7-8300-75f799e4d940.png)
 
 ## Current Features include:<b>
 1) Current Time.
