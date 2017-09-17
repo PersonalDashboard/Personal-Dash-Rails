@@ -19,6 +19,28 @@ module ExternalData
     end
   end
 
+  def map_link(widget)
+    "https://www.google.com/maps/embed/v1/directions?key=#{ENV['MAPS_API_KEY']}&origin=#{home_address(widget)}&destination=#{work_address(widget)}"
+  end
+
+  def home_address(widget)
+    data = widget_data(widget)
+    address_components = data.data.split(',')[0..2]
+    address_components[0] = address_components[0].parameterize.underscore
+    address_components.join('+')
+  end
+
+  def work_address(widget)
+    data = widget_data(widget)
+    address_components = data.data.split(',')[3..5]
+    address_components[0] = address_components[0].parameterize.underscore
+    address_components.join('+')
+  end
+
+  def widget_data(widget)
+    @widget_datum.find_by_widget_id(widget.id)
+  end
+
   def get_data(url, ssl = false)
     url = URI.parse(url)
     req = Net::HTTP.new(url.host, url.port)
@@ -36,14 +58,22 @@ module ExternalData
 
   def widget_api_data(widget)
     data = Hash.new
-    widget_name_key(widget).each { |name, map| data[name] = widget_data_results(name, map, widget.data_url) }
+    widget_name_key(widget).each { |name, map| data[name] = widget_data_results(name, map, widget) }
     data
   end
 
-  def widget_data_results(name, map, url)
-    results = get_data(url, ssl?(map["protocol"]))
+  def widget_data_results(name, map, widget)
+    results = get_results(map, widget)
     parsed_results = parse_results(results, map["path"])
     finalize_results(parsed_results, map["post_processor"])
+  end
+
+  def get_results(map, widget)
+    if map["map"] && !widget.data_url
+      map_link(widget)
+    else
+      get_data(widget.data_url, ssl?(map["protocol"]))
+    end
   end
 
   def widget_name_key(widget)
@@ -65,6 +95,7 @@ module ExternalData
   end
 
   def parse_results(results, path)
+    return results unless path
     path_array = path.split(',')
 
     path_as_nav = ""

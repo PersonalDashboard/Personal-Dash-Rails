@@ -10,6 +10,18 @@ module DashboardsHelper
     output.join('')
   end
 
+  def template_for(widget, map = false)
+    template = map ? map_template(widget) : standard_template(widget)
+    output = template.map do |name, segment|
+      map ? standard_data(segment, widget, name) : list_or_standard(segment, widget, name)
+    end
+    output.join('')
+  end
+
+  def list_or_standard(segment, widget, name)
+    segment["each"] ?  list_data(segment, widget, name) : standard_data(segment, widget, name)
+  end
+
   def standard_data(segment, widget, name)
     "#{segment["start_body"]}#{data_item(widget, name)}#{segment["end_body"].to_s}"
   end
@@ -36,7 +48,7 @@ module DashboardsHelper
 
   def map_template_for(widget)
     output = map_template(widget).map do |name, segment|
-      "#{segment["start_body"]}#{@dashboard.map_link}#{segment["end_body"]}"
+      standard_data(segment, widget, name)
     end
     output.join('')
   end

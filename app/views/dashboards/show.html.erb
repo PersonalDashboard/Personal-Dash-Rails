@@ -21,11 +21,11 @@
             <h2 class="panel-title pull-right"><%= widget.name %></h2>
           </div>
           <div class="panel-body">
-            <%=raw standard_template_for(widget) %>
+            <%=raw template_for(widget) %>
           </div>
         </div>
       </div>
     <% end %>
-    <%=raw map_template_for(widget) if map_template(widget) %>
+    <%=raw template_for(widget, true) if map_template(widget) %>
   <% end %>
 </div>

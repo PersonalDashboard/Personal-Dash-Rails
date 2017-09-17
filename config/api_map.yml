@@ -23,5 +23,9 @@ weather:
     protocol: "http"
     path: "weather,0,id"
     post_processor: "weather_icon"
+traffic:
+  google:
+    map: true
+
 
 

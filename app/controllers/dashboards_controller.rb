@@ -13,12 +13,13 @@ class DashboardsController < ApplicationController
   def show
     @dashboard = Dashboard.find(params[:id])
 
-    @widgets = WidgetDatum.user_widgets(current_user).map do |data|
+    @widget_datum = WidgetDatum.user_widgets(current_user)
+    @widgets = @widget_datum.map do |data|
       Widget.all.detect { |widget| data.widget_id == widget.id }
     end
 
     @data = Hash.new
-    @widgets.each { |widget| @data[widget.name] = widget_api_data(widget) if widget.data_url }
+    @widgets.each { |widget| @data[widget.name] = widget_api_data(widget) }
     @templates = YAML.load_file("#{Rails.root}/config/widget_templates.yml")
   end
 end
