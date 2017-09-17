@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170722170622) do
+ActiveRecord::Schema.define(version: 20170730171400) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,5 +49,21 @@ ActiveRecord::Schema.define(version: 20170722170622) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "widget_data", force: :cascade do |t|
+    t.string "data"
+    t.bigint "widget_id"
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_widget_data_on_user_id"
+    t.index ["widget_id"], name: "index_widget_data_on_widget_id"
+  end
+
+  create_table "widgets", force: :cascade do |t|
+    t.string "name"
+    t.string "data_url"
+    t.string "field_names"
+  end
+
   add_foreign_key "dashboards", "users"
+  add_foreign_key "widget_data", "users"
+  add_foreign_key "widget_data", "widgets"
 end
