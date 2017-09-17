@@ -1,27 +1,4 @@
 module ExternalData
-  def get_weather_data
-    url = "http://api.openweathermap.org/data/2.5/weather?q=#{@dashboard.user.home_city}&units=metric&appid=42009b873989896f45246d961a6a290c"
-    weather_data = get_data(url, false)
-    temp = fahrenheit(weather_data["main"]["temp"])
-    current_weather_icon = weather_icon(weather_data["weather"][0]["id"])
-    [temp, current_weather_icon]
-  end
-
-  def get_news_articles
-    url = "http://newsapi.org/v1/articles?source=bbc-news&apiKey=2a593a55a7764c31939325eb9e41d54b"
-    get_data(url, false)["articles"]
-  end
-
-  def get_how_to_data
-    url = "https://www.reddit.com/r/howto.json"
-    get_data(url, true)["data"]["children"][0]["data"]
-  end
-
-  def get_quote_data
-    url = "https://favqs.com/api/qotd"
-    get_data(url, true)["quote"]["body"]
-  end
-
   def fahrenheit(temp)
     ((temp * 1.8) + 32).round
   end
@@ -36,6 +13,12 @@ module ExternalData
     "#{prefix}#{icon}"
   end
 
+  def news_link(results)
+    results.map do |result|
+      "<a href='#{result["url"]}'>#{result["title"]}</a>"
+    end
+  end
+
   def get_data(url, ssl = false)
     url = URI.parse(url)
     req = Net::HTTP.new(url.host, url.port)
@@ -45,5 +28,54 @@ module ExternalData
     end
     res = req.get(url)
     JSON.parse(res.body)
+  end
+
+  def ssl?(protocol)
+    protocol == "https"
+  end
+
+  def widget_api_data(widget)
+    data = Hash.new
+    widget_name_key(widget).each { |name, map| data[name] = widget_data_results(name, map, widget.data_url) }
+    data
+  end
+
+  def widget_data_results(name, map, url)
+    results = get_data(url, ssl?(map["protocol"]))
+    parsed_results = parse_results(results, map["path"])
+    finalize_results(parsed_results, map["post_processor"])
+  end
+
+  def widget_name_key(widget)
+    name = widget.name.parameterize.underscore
+    api_map = YAML.load_file("#{Rails.root}/config/api_map.yml")
+    api_map[name]
+  end
+
+  def finalize_results(results, post_processor)
+    post_processor_exists?(post_processor) ? post_processed_results(results, post_processor) : results
+  end
+
+  def post_processor_exists?(post_processor)
+    post_processor && respond_to?(post_processor.to_sym)
+  end
+
+  def post_processed_results(results, post_processor)
+    public_send(post_processor.to_sym, results)
+  end
+
+  def parse_results(results, path)
+    path_array = path.split(',')
+
+    path_as_nav = ""
+    path_array.each do |item|
+      if /\A\d+\z/ =~ item
+        path_as_nav << "[#{item}]"
+      else
+        path_as_nav << "['#{item}']"
+      end
+    end
+
+    eval("#{results}#{path_as_nav}")
   end
 end
