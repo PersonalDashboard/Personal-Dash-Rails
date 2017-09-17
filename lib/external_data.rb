@@ -19,6 +19,10 @@ module ExternalData
     end
   end
 
+  def how_to_link(result)
+    "<a href='#{result["url"]}'>#{result["title"]}</a>"
+  end
+
   def map_link(widget)
     "https://www.google.com/maps/embed/v1/directions?key=#{ENV['MAPS_API_KEY']}&origin=#{home_address(widget)}&destination=#{work_address(widget)}"
   end

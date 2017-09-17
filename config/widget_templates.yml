@@ -15,8 +15,8 @@ templates:
       start_body: "<div id='newsfeed'>"
       end_body: "</div>"
       each:
-        start_body: "<div class='col-md-12'><a href="
-        end_body: "</a></div>"
+        start_body: "<div class='col-md-12'>"
+        end_body: "</div>"
   weather:
     time:
       start_body: "<div class='row'><div class='col-md-3 col-xs-1'><div class='glyphicon glyphicon-time'></div></div><div class='col-xs-9' id='time'></div></div>"

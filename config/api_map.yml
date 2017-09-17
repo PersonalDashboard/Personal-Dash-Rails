@@ -10,7 +10,8 @@ quote_of_the_day:
 how_to:
   title:
     protocol: "https"
-    path: "data,children,0,data,title"
+    path: "data,children,0,data"
+    post_processor: "how_to_link"
   thumbnail:
     protocol: "https"
     path: "data,children,0,data,thumbnail"
