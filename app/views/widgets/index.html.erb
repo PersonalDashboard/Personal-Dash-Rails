@@ -1,0 +1,28 @@
+<div class="jumbotron">
+  <div class="title_and_nav">
+    <div class="title">Personal Dash</div>
+    <div class="dropdown pull-right">
+      <%# <a class="dropdown-toggle" type="button" data-toggle="dropdown"><%= @dashboard.user.email %1> %>
+      <span class="caret"></span></a>
+      <ul class="dropdown-menu">
+        <li><%= link_to "Log Out", destroy_user_session_path, method: :delete %></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="panel panel-default">
+    <% @widgets.each do |widget| %>
+      <div class="widget-check-container inline-block" data-widget-data="<%= widget_data_id(widget) %>">
+      <label class="checkbox-inline">
+        <input class="widget-check" data-user="<%= current_user.id %>"
+                                    data-widget="<%= widget.id %>"
+                                    type="checkbox" value="">
+                                    <%= widget.name %>
+        <div class="edit-widget-data-link"></div>
+      </label>
+    </div>
+    <% end %>
+  </div>
+</div>

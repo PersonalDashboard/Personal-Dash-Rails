@@ -1,0 +1,27 @@
+news:
+  articles:
+    protocol: "http"
+    path: "articles"
+    post_processor: "news_link"
+quote_of_the_day:
+  quote:
+    protocol: "https"
+    path: "quote,body"
+how_to:
+  title:
+    protocol: "https"
+    path: "data,children,0,data,title"
+  thumbnail:
+    protocol: "https"
+    path: "data,children,0,data,thumbnail"
+weather:
+  temp:
+    protocol: "http"
+    path: "main,temp"
+    post_processor: "fahrenheit"
+  icon:
+    protocol: "http"
+    path: "weather,0,id"
+    post_processor: "weather_icon"
+
+

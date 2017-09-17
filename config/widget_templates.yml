@@ -1,0 +1,33 @@
+templates:
+  quote_of_the_day:
+    quote:
+      start_body: "<div id='quote' class='col-md-12'>"
+      end_body: "</div>"
+  how_to:
+    thumbnail:
+      start_body: "<div class='col-md-3 col-xs-1' id='how-to-thumb'><div class='col-md-12'><img src=\""
+      end_body: "\" height='75' width='75'/></div></div>"
+    title:
+      start_body: "<div class='col-xs-9' id='how-to'><div class='col-md-12'>"
+      end_body: "</div></div>"
+  news:
+    articles:
+      start_body: "<div id='newsfeed'>"
+      end_body: "</div>"
+      each:
+        start_body: "<div class='col-md-12'><a href="
+        end_body: "</a></div>"
+  weather:
+    time:
+      start_body: "<div class='row'><div class='col-md-3 col-xs-1'><div class='glyphicon glyphicon-time'></div></div><div class='col-xs-9' id='time'></div></div>"
+    icon:
+      start_body: "<div class='row'><div class='col-md-3 col-xs-1'><div class='weather-icon "
+      end_body: "'></div></div>"
+    temp:
+      start_body: "<div class='col-xs-9'><div id='temp'>"
+      end_body: "&deg;</div></div></div>"
+map_template:
+  traffic:
+    google:
+      start_body: "<div class='row'><div class='col-md-12'><div class='panel panel-default'><div class='panel-heading'><a class='collapse-btn'><i class='glyphicon glyphicon-chevron-down'></i></a><h2 class='panel-title pull-right'>Traffic</h2></div><div class='panel-body'><iframe width='100%' height='450' frameborder='0' style='border:0' src="
+      end_body: " allowfullscreen></iframe>"

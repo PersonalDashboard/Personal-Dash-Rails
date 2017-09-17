@@ -12,87 +12,20 @@
 </div>
 
 <div class="container">
-  <div class="row">
-    <div class="col-md-3">
-      <div class="panel panel-default icon-panel">
-        <div class="panel-heading">
-          <a  class="collapse-btn"><i class="glyphicon glyphicon-chevron-down"></i></a>
-          <h2 class="panel-title pull-right"><%= @dashboard.user.home_city.capitalize %></h2>
-        </div>
-        <div id="time-container" class="panel-body">
-          <div class="row">
-            <div class="col-md-3 col-xs-1"><div class="glyphicon glyphicon-time"></div></div>
-            <div class="col-xs-9" id="time"></div>
+  <% @widgets.each do |widget| %>
+    <% if standard_template(widget) %>
+      <div class="col-md-3">
+        <div class="panel panel-default icon-panel">
+          <div class="panel-heading">
+            <a  class="collapse-btn"><i class="glyphicon glyphicon-chevron-down"></i></a>
+            <h2 class="panel-title pull-right"><%= widget.name %></h2>
           </div>
-          <div class="row">
-            <div class="col-md-3 col-xs-1"><div class="weather-icon <%= @current_weather_icon %>"></div></div>
-            <div class="col-xs-9"><div id="temp"><%= @temp %>&deg;</div></div>
+          <div class="panel-body">
+            <%=raw standard_template_for(widget) %>
           </div>
         </div>
       </div>
-    </div>
-
-    <div class="col-md-3">
-      <div class="panel panel-default icon-panel">
-        <div class="panel-heading">
-          <a  class="collapse-btn"><i class="glyphicon glyphicon-chevron-down"></i></a>
-          <h2 class="panel-title pull-right">News</h2>
-        </div>
-        <div id="newsfeed" class="panel-body">
-          <% @news_articles.each do |article| %>
-            <div class='col-md-12'><a href=<%= article["url"] %>><%= article["title"] %></a></div>
-          <% end %>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-3">
-      <div class="panel panel-default icon-panel">
-        <div class="panel-heading">
-          <a  class="collapse-btn"><i class="glyphicon glyphicon-chevron-down"></i></a>
-          <h2 class="panel-title pull-right">How To</h2>
-        </div>
-        <div class="panel-body">
-          <div class="col-md-3 col-xs-1" id="how-to-thumb">
-            <div class='col-md-12'><img src="<%= @how_to_data["thumbnail"] %>" height="75" width="75"/></div>
-          </div>
-          <div class="col-xs-9" id="how-to">
-            <div class='col-md-12'><a href="<%= @how_to_data["url"] %>"><%= @how_to_data["title"] %></a></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-3">
-      <div class="panel panel-default icon-panel">
-        <div class="panel-heading">
-          <a  class="collapse-btn"><i class="glyphicon glyphicon-chevron-down"></i></a>
-          <h2 class="panel-title pull-right">Quote of the Day</h2>
-        </div>
-        <div id="quote" class="panel-body">
-          <div class='col-md-12'><%= @quote_data %></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-12">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <a  class="collapse-btn"><i class="glyphicon glyphicon-chevron-down"></i></a>
-          <h2 class="panel-title pull-right">Traffic</h2>
-        </div>
-        <div class="panel-body">
-          <iframe
-            width="100%"
-            height="450"
-            frameborder="0" style="border:0"
-            src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyDegZ6M6uR-zuwpyWGNZOiQ4k3qOs5_kJw
-            &origin=<%= @dashboard.home_address_for_maps %>&destination=<%= @dashboard.work_address_for_maps %>" allowfullscreen>
-          </iframe>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>  
+    <% end %>
+    <%=raw map_template_for(widget) if map_template(widget) %>
+  <% end %>
+</div>

@@ -1,0 +1,94 @@
+
+
+
+
+  <div class="row">
+    <div class="col-md-3">
+      <div class="panel panel-default icon-panel">
+        <div class="panel-heading">
+          <a  class="collapse-btn"><i class="glyphicon glyphicon-chevron-down"></i></a>
+          <h2 class="panel-title pull-right">Weather</h2>
+        </div>
+        <div class="panel-body">
+          <%= raw(@templates["templates"]["weather"]["time"]) %>
+
+            <%= raw(@templates["templates"]["weather"]["weather_icon"]["start_body"]) %>
+            <%= @current_weather_icon %>
+            <%= raw(@templates["templates"]["weather"]["weather_icon"]["end_body"]) %>
+
+            <%= raw(@templates["templates"]["weather"]["temperature"]["start_body"]) %>
+            <%= @temp %>
+            <%= raw(@templates["templates"]["weather"]["temperature"]["end_body"]) %>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="panel panel-default icon-panel">
+        <div class="panel-heading">
+          <a  class="collapse-btn"><i class="glyphicon glyphicon-chevron-down"></i></a>
+          <h2 class="panel-title pull-right">News</h2>
+        </div>
+        <div class="panel-body">
+          <%= raw(@templates["templates"]["news"]["body"]["start_body"]) %>
+          <% @news_articles.each do |article| %>
+            <%= raw(@templates["templates"]["news"]["each"]["start"]) %>
+            <%= article["url"] %>><%= article["title"] %>
+            <%= raw(@templates["templates"]["news"]["each"]["end"]) %>
+          <% end %>
+          <%= raw(@templates["templates"]["news"]["body"]["end_body"]) %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="panel panel-default icon-panel">
+        <div class="panel-heading">
+          <a  class="collapse-btn"><i class="glyphicon glyphicon-chevron-down"></i></a>
+          <h2 class="panel-title pull-right">How To</h2>
+        </div>
+        <div class="panel-body">
+          <%= raw(@templates["templates"]["how_to"]["thumbnail"]["start_body"]) %>
+          <%= @how_to_data["thumbnail"] %>
+          <%= raw(@templates["templates"]["how_to"]["thumbnail"]["end_body"]) %>
+
+          <%= raw(@templates["templates"]["how_to"]["body"]["start_body"]) %>
+          <%= link_to @how_to_data["title"], @how_to_data["url"] %>
+          <%= raw(@templates["templates"]["how_to"]["body"]["end_body"]) %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="panel panel-default icon-panel">
+        <div class="panel-heading">
+          <a  class="collapse-btn"><i class="glyphicon glyphicon-chevron-down"></i></a>
+          <h2 class="panel-title pull-right">Quote of the day</h2>
+        </div>
+        <div class="panel-body">
+          <%= raw(@templates["templates"]["quote"]["start_body"]) %><%= @quote_data %><%= raw(@templates["templates"]["quote"]["end_body"]) %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <a  class="collapse-btn"><i class="glyphicon glyphicon-chevron-down"></i></a>
+          <h2 class="panel-title pull-right">Traffic</h2>
+        </div>
+        <div class="panel-body">
+          <iframe
+            width="100%"
+            height="450"
+            frameborder="0" style="border:0"
+            src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyDegZ6M6uR-zuwpyWGNZOiQ4k3qOs5_kJw
+            &origin=<%= @dashboard.home_address_for_maps %>&destination=<%= @dashboard.work_address_for_maps %>" allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,28 @@
+<div class="jumbotron">
+  <div class="title_and_nav">
+    <div class="title">Personal Dash</div>
+    <div class="dropdown pull-right">
+      <%# <a class="dropdown-toggle" type="button" data-toggle="dropdown"><%= @dashboard.user.email %1> %>
+      <span class="caret"></span></a>
+      <ul class="dropdown-menu">
+        <li><%= link_to "Log Out", destroy_user_session_path, method: :delete %></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="panel panel-default">
+    <%= form_tag "/widget_data/#{@widget_data.id}", method: :put do %>
+      <% @widget.field_names.split(',').each do |field| %>
+        <div>
+        <label>
+          <%= field %>:
+          <%= text_field_tag field %>
+        </label>
+        </div>
+      <% end %>
+      <%= submit_tag "Save" %>
+    <% end %>
+  </div>
+</div>
