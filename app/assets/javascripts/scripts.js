@@ -1,4 +1,4 @@
-$(function(){
+$(document).on('turbolinks:load', function(){
   var date = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
   $('#time').html(date);
 
