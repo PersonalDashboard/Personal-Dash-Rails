@@ -67,7 +67,11 @@ module ExternalData
   end
 
   def widget_data_results(name, map, widget)
-    results = get_results(map, widget)
+    results = Hash.new
+    loop do
+      results = get_results(map, widget)
+      break if !results["error"]
+    end
     parsed_results = parse_results(results, map["path"])
     finalize_results(parsed_results, map["post_processor"])
   end
