@@ -35,7 +35,6 @@ class WidgetDataController < ApplicationController
       flash[:error] = "Widget data update failed"
       redirect_back(fallback_location: widgets_path)
     end
-
   end
 
   private

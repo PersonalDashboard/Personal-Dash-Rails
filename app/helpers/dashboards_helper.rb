@@ -1,13 +1,8 @@
 module DashboardsHelper
+  #todo convert this to a class
+
   def standard_template(widget)
     @templates["templates"][widget.name.parameterize.underscore]
-  end
-
-  def standard_template_for(widget)
-    output = standard_template(widget).map do |name, segment|
-      segment["each"] ?  list_data(segment, widget, name) : standard_data(segment, widget, name)
-    end
-    output.join('')
   end
 
   def template_for(widget, map = false)
@@ -44,12 +39,5 @@ module DashboardsHelper
 
   def map_template(widget)
     @templates["map_template"][widget.name.parameterize.underscore]
-  end
-
-  def map_template_for(widget)
-    output = map_template(widget).map do |name, segment|
-      standard_data(segment, widget, name)
-    end
-    output.join('')
   end
 end

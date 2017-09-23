@@ -1,5 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe WidgetDatum, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'user_widgets' do
+    it 'returns widget data belonging to the given user' do
+      user = FactoryGirl.create(:user)
+      weather_widget = Widget.find_by_name("Weather")
+      widget_datum = WidgetDatum.create(user_id: user.id, widget_id: weather_widget.id)
+      expect(WidgetDatum.user_widgets(user)).to include(widget_datum)
+    end
+  end
 end

@@ -1,15 +1,15 @@
 require 'rails_helper'
 
-# Specs in this file have access to a helper object that includes
-# the WidgetsHelper. For example:
-#
-# describe WidgetsHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
 RSpec.describe WidgetsHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'widget_data_id' do
+    let(:user) { FactoryGirl.create(:user) }
+    let!(:weather_widget) { Widget.find_by_name("Weather") }
+    let!(:widget_datum) { WidgetDatum.create(user_id: user.id, widget_id: weather_widget.id) }
+
+    it 'should determine the widget_data id of a given widget' do
+      assign(:user_widgets, Widget.where(name: "Weather"))
+      assign(:user_widget_data, WidgetDatum.where(id: widget_datum.id))
+      expect(helper.widget_data_id(weather_widget)).to eq(widget_datum.id)
+    end
+  end
 end
