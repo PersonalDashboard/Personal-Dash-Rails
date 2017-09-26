@@ -1,4 +1,5 @@
 class Widget < ApplicationRecord
+  has_many :widget_data
   def self.seed_widgets
     create(name: "Weather", data_url: "http://api.openweathermap.org/data/2.5/weather?q=jacksonville&units=metric&appid=#{ENV['OPEN_WEATHER_MAP_API_KEY']}", field_names: "city,state")
     create(name: "News", data_url: "http://newsapi.org/v1/articles?source=bbc-news&apiKey=#{ENV['NEWS_API_KEY']}")

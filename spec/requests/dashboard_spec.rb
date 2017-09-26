@@ -16,7 +16,7 @@ describe "Dashboards", type: :request do
     context 'user has added a widget' do
       it 'shows the widget on the dashboard' do
         news_widget = Widget.find_by_name("News")
-        WidgetDatum.create(user_id: dashboard.user.id, widget_id: news_widget.id)
+        WidgetDatum.create(user: dashboard.user, widget: news_widget)
         visit root_path
         expect(page).to have_content("News")
       end

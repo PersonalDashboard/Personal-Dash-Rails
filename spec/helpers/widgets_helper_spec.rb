@@ -4,7 +4,7 @@ RSpec.describe WidgetsHelper, type: :helper do
   describe 'widget_data_id' do
     let(:user) { FactoryGirl.create(:user) }
     let!(:weather_widget) { Widget.find_by_name("Weather") }
-    let!(:widget_datum) { WidgetDatum.create(user_id: user.id, widget_id: weather_widget.id) }
+    let!(:widget_datum) { WidgetDatum.create(user: user, widget: weather_widget) }
 
     it 'should determine the widget_data id of a given widget' do
       assign(:user_widgets, Widget.where(name: "Weather"))

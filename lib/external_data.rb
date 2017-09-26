@@ -42,7 +42,7 @@ module ExternalData
   end
 
   def widget_data(widget)
-    @widget_datum.find_by_widget_id(widget.id)
+    @widget_datum.find_by_widget(widget)
   end
 
   def get_data(url, ssl = false)

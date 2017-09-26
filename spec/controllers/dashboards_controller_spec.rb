@@ -15,7 +15,7 @@ describe DashboardsController do
     it "should set needed data variables" do
       get :show, params: {id: dashboard.to_param}
       expect(assigns(:dashboard)).to eq(dashboard)
-      expect(assigns(:widgets).length).to eq(WidgetDatum.where(user_id: dashboard.user.id).length)
+      expect(assigns(:widgets).length).to eq(WidgetDatum.where(user: dashboard.user).length)
       expect(assigns(:data).length).to eq(assigns(:widgets).length)
       expect(assigns(:templates)).to have_key("templates")
     end

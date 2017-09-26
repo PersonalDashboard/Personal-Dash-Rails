@@ -3,12 +3,12 @@ require 'rails_helper'
 RSpec.describe WidgetDataController, type: :controller do
   let(:user) { FactoryGirl.create(:user) }
   let!(:weather_widget) { Widget.find_by_name("Weather") }
-  let!(:widget_datum) { WidgetDatum.create(user_id: user.id, widget_id: weather_widget.id) }
+  let!(:widget_datum) { WidgetDatum.create(user: user, widget: weather_widget) }
   before(:each) { sign_in user }
 
   describe 'create' do
     it 'returns the widget data id in a JSON hash' do
-      post :create, params: { user_id: user.id, widget_id: weather_widget.id }, format: :json
+      post :create, params: { user: user, widget: weather_widget }, format: :json
       expect(JSON.parse(response.body)).to eq({ widget_data: WidgetDatum.last.id }.stringify_keys)
     end
   end

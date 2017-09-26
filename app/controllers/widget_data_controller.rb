@@ -2,7 +2,9 @@ class WidgetDataController < ApplicationController
   before_action :set_widget_variables, only: [:edit, :update]
 
   def create
-    widget_data = WidgetDatum.create(user_id: params[:user], widget_id: params[:widget])
+    user = User.find(params[:user])
+    widget = Widget.find(params[:widget])
+    widget_data = WidgetDatum.create(user: user, widget: widget)
 
     respond_to do |format|
       format.json do
@@ -40,6 +42,6 @@ class WidgetDataController < ApplicationController
   private
     def set_widget_variables
       @widget_data = WidgetDatum.find(params[:id])
-      @widget = Widget.find(@widget_data.widget_id)
+      @widget = @widget_data.widget
     end
 end

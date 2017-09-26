@@ -15,7 +15,7 @@ class DashboardsController < ApplicationController
 
     @widget_datum = WidgetDatum.user_widgets(current_user)
     @widgets = @widget_datum.map do |data|
-      Widget.all.detect { |widget| data.widget_id == widget.id }
+      Widget.all.detect { |widget| data.widget == widget }
     end
 
     @data = Hash.new

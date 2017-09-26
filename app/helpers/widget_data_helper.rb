@@ -1,2 +1,0 @@
-module WidgetDataHelper
-end
