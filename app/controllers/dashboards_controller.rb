@@ -1,9 +1,9 @@
 require 'net/http'
 require 'net/https'
 require 'external_data'
+require 'template_generator'
 
 class DashboardsController < ApplicationController
-  include ExternalData
   before_action :authenticate_user!
 
   def index
@@ -18,8 +18,10 @@ class DashboardsController < ApplicationController
       Widget.all.detect { |widget| data.widget == widget }
     end
 
-    @data = Hash.new
-    @widgets.each { |widget| @data[widget.name] = widget_api_data(widget) }
-    @templates = YAML.load_file("#{Rails.root}/config/widget_templates.yml")
+    data = Hash.new
+    external_data = ExternalData.new(current_user)
+    @widgets.each { |widget| data[widget.name] = external_data.widget_api_data(widget) }
+    templates = YAML.load_file("#{Rails.root}/config/widget_templates.yml")
+    @template_generator = TemplateGenerator.new(templates, data)
   end
 end

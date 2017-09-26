@@ -1,6 +1,6 @@
 <div class="container">
   <% @widgets.each do |widget| %>
-    <% if standard_template(widget) %>
+    <% if @template_generator.standard_template(widget) %>
       <div class="col-md-3">
         <div class="panel panel-default icon-panel">
           <div class="panel-heading">
@@ -8,11 +8,11 @@
             <h2 class="panel-title pull-right"><%= widget.name %></h2>
           </div>
           <div class="panel-body">
-            <%=raw template_for(widget) %>
+            <%=raw @template_generator.template_for(widget) %>
           </div>
         </div>
       </div>
     <% end %>
-    <%=raw template_for(widget, true) if map_template(widget) %>
+    <%=raw @template_generator.template_for(widget, true) if @template_generator.map_template(widget) %>
   <% end %>
 </div>
