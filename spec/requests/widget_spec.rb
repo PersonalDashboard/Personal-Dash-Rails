@@ -9,6 +9,7 @@ RSpec.describe "Widget", type: :request do
     it 'creates when checkbox is checked', js: true do
       visit widgets_path
       check 'Weather'
+      sleep 3
       expect(WidgetDatum.last.widget).to eq(weather_widget)
     end
   end
@@ -18,6 +19,7 @@ RSpec.describe "Widget", type: :request do
       data = WidgetDatum.create(user: dashboard.user, widget: weather_widget)
       visit widgets_path
       uncheck 'Weather'
+      sleep 3
       expect(WidgetDatum.find_by_id(data.id)).to eq(nil)
     end
   end

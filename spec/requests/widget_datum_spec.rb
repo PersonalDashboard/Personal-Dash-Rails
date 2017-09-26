@@ -8,6 +8,7 @@ RSpec.describe "Widget datum", type: :request do
     it 'adds data to widget', js: true do
       visit widgets_path
       check 'Weather'
+      sleep 3
       data = WidgetDatum.last
       visit edit_widget_datum_path(data)
       fill_in('city', with: 'Jacksonville')
