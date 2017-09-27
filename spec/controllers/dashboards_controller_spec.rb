@@ -16,8 +16,7 @@ describe DashboardsController do
       get :show, params: {id: dashboard.to_param}
       expect(assigns(:dashboard)).to eq(dashboard)
       expect(assigns(:widgets).length).to eq(WidgetDatum.where(user: dashboard.user).length)
-      expect(assigns(:data).length).to eq(assigns(:widgets).length)
-      expect(assigns(:templates)).to have_key("templates")
+      expect(assigns(:template_generator)).to be_an_instance_of(TemplateGenerator)
     end
   end
 end

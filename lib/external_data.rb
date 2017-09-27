@@ -4,6 +4,12 @@ class ExternalData
     @user = user
   end
 
+  def widget_api_data(widget)
+    data = Hash.new
+    widget_name_key(widget).each { |name, map| data[name] = widget_data_results(name, map, widget) }
+    data
+  end
+
   def fahrenheit(temp)
     ((temp * 1.8) + 32).round
   end
@@ -65,12 +71,6 @@ class ExternalData
 
     def ssl?(protocol)
       protocol == "https"
-    end
-
-    def widget_api_data(widget)
-      data = Hash.new
-      widget_name_key(widget).each { |name, map| data[name] = widget_data_results(name, map, widget) }
-      data
     end
 
     def widget_data_results(name, map, widget)
