@@ -35,21 +35,15 @@ class ExternalData
   end
 
   def map_link(widget)
-    "https://www.google.com/maps/embed/v1/directions?key=#{ENV['MAPS_API_KEY']}&origin=#{home_address(widget)}&destination=#{work_address(widget)}"
+    "https://www.google.com/maps/embed/v1/directions?key=#{ENV['MAPS_API_KEY']}&origin=#{address(widget, "home")}&destination=#{address(widget, "work")}"
   end
 
   private
 
-    def home_address(widget)
+    def address(widget, type)
       data = widget_data(widget)
-      address_components = data.data.split(',')[0..2]
-      address_components[0] = address_components[0].parameterize.underscore
-      address_components.join('+')
-    end
-
-    def work_address(widget)
-      data = widget_data(widget)
-      address_components = data.data.split(',')[3..5]
+      split_data = data.data.split(',')
+      address_components  = type == "home" ? split_data[0..2] : split_data[3..5]
       address_components[0] = address_components[0].parameterize.underscore
       address_components.join('+')
     end
